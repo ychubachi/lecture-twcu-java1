@@ -204,9 +204,9 @@
   class Main {
     public static void main(String[] args) {
       System.out.println("情報処理技法");
-      System.out.println(new StringBuilder("情報処理技法").reverse());
       System.out.println(1 + 2);
       System.out.println(Math.PI);
+      System.out.println(new StringBuilder("情報処理技法").reverse());
     }
   }
 #+end_src
@@ -217,7 +217,7 @@
 : 3
 : 3.141592653589793
 
-- このように、複数の行を書くこともできる。
+- このように、プログラムには *複数の行を書く* ことができる。
 
 * 字句構造：プログラミングの基礎知識                                    :#02:
 ** 追加資料
@@ -282,7 +282,7 @@
 
 ** コメント（Comments）
 
-- ソースコードに自然言語（日本語や英語など）で [[https://docs.oracle.com/javase/specs/jls/se18/html/jls-3.html#jls-3.7][3.7.Comments]] を記述できる
+- プログラムに自然言語（日本語や英語など）で [[https://docs.oracle.com/javase/specs/jls/se18/html/jls-3.html#jls-3.7][3.7.Comments]] を記述できる
   - コメントは人間が読むためのものであり、コンピュータは読み飛ばす
   - コメントを適切に書くことで、 *人間* が読みやすいプログラムになる
 
