@@ -939,7 +939,17 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
 : -8022
 : 1234567890123456789
 
-*** 実数型 <- ここから
+- Lをつけないとエラー。
+
+#+begin_src java :results output
+class Main {
+  public static void main(String[] args) {
+    System.out.println(2147483648L);
+  }
+}
+#+end_src
+
+*** 実数型
 
 - float型実数（アルファベットのFをつける）
   - -1.0F
@@ -974,6 +984,20 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
 #+begin_note
 要するに、数字の他にピリオドがなければint、あればdoubleと扱われると覚えれば良い。
 #+end_note
+
+#+begin_src java :results output
+class Main {
+  public static void main(String[] args) {
+    System.out.println(1E+2); // 1*10^2 = 1*100 = 100
+    System.out.println(1E+1); // 1*10^1 = 1*10 = 10
+    System.out.println(1E+0); // 1*10^0 = 1*1 = 1
+    System.out.println(1E-1); // 1*10^(-1) = 1*0.1 = 0.1
+    System.out.println(1E-2); // 1*10^(-2) = 1*0.1 = 0.01
+
+    System.out.println(6.02214076E+23);
+  }
+}
+#+end_src
 
 ** 真偽値の直値                                                        :#05:
 *** 真偽値型
@@ -1064,20 +1088,32 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
   - ='\t'=      タブ（Tab）のエスケープシークエンス他にもいろいろある（が、めったに使わない）
 
 #+begin_src java -n :results output
-  System.out.println('\n');
-  System.out.println('\n');
+class Main {
+  public static void main(String[] args) {
+    System.out.print('\t');
+    System.out.print('a');
+    System.out.print('\n');
+  }
+}
 #+end_src
 
+- Unicode
+  - [[https://home.unicode.org/][Unicode – The World Standard for Text and Emoji]]
+
+
 - Unicodeもエスケープシーケンス（の16進数）で表してしまえ！
+
+#+begin_comment
   - ='\u3000'= みんな大好き全角のスペース
   - ='\u0027'=  シングルクォーテーションをUnicodeで
   - ='\u005C'=  バックスラッシュをUnicodeで
+#+end_comment
 
 #+begin_src java -n :results output
-  System.out.println('\u3000');
-  System.out.println('\u0027');
-  System.out.println('\u005C');
-#+end_src
+    System.out.print('\u2708');
+    System.out.print('\uD392');
+    System.out.print('\u0A09');
+  #+end_src
 
 #+RESULTS:
 
@@ -1116,6 +1152,19 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
 | ="🥺"=                                     | 絵文字は1文字でも文字列（2文字相当） |
 | =""=                                       | 空文字列（長さ0の文字列）            |
 
+#+begin_src java :results output
+class Main {
+  public static void main(String[] args) {
+    System.out.println("こんにちは");
+    System.out.println("あけましておめでとう\nことしもよろしく");
+    System.out.println("\u6771\u4eac");
+    System.out.println("文字列は\"で囲む");
+    System.out.println("文字は'で囲む");
+    System.out.println("🥺");
+    System.out.println("");
+  }
+}
+#+end_src
 #+begin_note
 空文字（ =''= ）はエラーとなるが、空文字列（ =""= ）はエラーとならない。なぜだろう？
 #+end_note
