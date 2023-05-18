@@ -1136,7 +1136,7 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
 
 #+RESULTS:
 
-* 変数の宣言・代入・参照・初期化と名前                                  :#06:
+* 変数の宣言・代入・参照・初期化と名前                                  :#05:
 ** 変数（Variable）とは？
 :PROPERTIES:
 :CUSTOM_ID: 変数variableとは
