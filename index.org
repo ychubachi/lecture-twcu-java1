@@ -1211,7 +1211,7 @@ class Main {
     と指示すること
   - ある名前に「それは変数だよ」という意味を与えること
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i;        // 整数型のiという変数を宣言
   double pi;    // 倍精度実数型のpiという変数を宣言
   char ch;      // 文字型のchという変数を宣言
@@ -1222,14 +1222,14 @@ class Main {
 
 - 同じ型の変数を複数宣言することもできる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i,j;
   double x,y,z;
 #+end_src
 
 - 宣言をしないで参照することはできない
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(ch); // Error!
 #+end_src
 
@@ -1237,7 +1237,7 @@ class Main {
 
 - 予約語を変数名にすることはできない
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int class;      // classは予約語
   double public;  // publicは予約語
   boolean static; // staticは予約語
@@ -1253,10 +1253,10 @@ class Main {
 - 参照
   - 変数の値を取得すること
 
-#+begin_src java -n :results output
-  int i;                 // 1: 整数型の変数iを宣言
-  i = 27;                // 2: 変数iに27を代入
-  System.out.println(i); // 3: 変数iを参照
+#+begin_src java :results output
+  int i;                 // 整数型の変数iを宣言
+  i = 27;                // 変数iに27を代入
+  System.out.println(i); // 変数iを参照
 #+end_src
 
 #+RESULTS:
@@ -1280,7 +1280,7 @@ class Main {
 
 - 変数の宣言と初期化は同時に行うことができる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int x = 0;             // 変数xを宣言し初期化
   System.out.println(x); // 変数xを参照できる
 #+end_src
@@ -1288,14 +1288,14 @@ class Main {
 #+RESULTS:
 : 0
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int x;                 // 変数xを宣言して初期化しない
   System.out.println(x); // 変数xを参照 -> Error!
 #+end_src
 
 #+RESULTS:
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int x;                 // 変数xを宣言して初期化しない
   x = -1;                // 代入をすれば、
   System.out.println(x); // 変数xを参照 -> OK
@@ -1304,7 +1304,7 @@ class Main {
 #+RESULTS:
 : -1
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double pi = 3.14;       // 変数piを宣言し初期化
   System.out.println(pi); // 変数piを参照できる
 #+end_src
@@ -1312,7 +1312,7 @@ class Main {
 #+RESULTS:
 : 3.14
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   boolean flag = true;      // 変数flagを宣言し初期化
   System.out.println(flag); // 変数flagを参照できる
 #+end_src
@@ -1320,7 +1320,7 @@ class Main {
 #+RESULTS:
 : true
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   byte   b = 3;
   int    i = -11;
   long   l = 1245678901234567890L;
@@ -1352,7 +1352,7 @@ class Main {
 
 - 宣言は一度だけしておけば、何度でも代入できる。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 0;             // 変数iを宣言し初期化
   System.out.println(i); // 変数i = 0
   i = 1;                 // 変数iに代入
@@ -1364,7 +1364,7 @@ class Main {
 - 複数の変数の宣言と初期化の方法
   - こういう方法もある、と
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double x, y, z;
   x = y = z = 12.345;
   System.out.println(x);
@@ -1395,7 +1395,7 @@ class Main {
 
 - 同じ名前の変数を、同じブロックで複数回宣言することはできない。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 0;             // 変数iを宣言し初期化
   System.out.println(i); // 変数i = 0
   int i = 1;             // 変数iを再び宣言 -> Error!!
@@ -1410,7 +1410,7 @@ class Main {
 
 - ブロックが異なれば、同じ名前を使える（ブロック＝名前空間）。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   {
       int i = 0;             // 変数iを宣言し初期化
       System.out.println(i); // 変数i = 0
@@ -1427,7 +1427,7 @@ class Main {
 
 - 外側のブロックで宣言した変数は、内側でも使える。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   {
       int out;
       {
@@ -1442,7 +1442,7 @@ class Main {
 
 - 内側のブロックで代入した値は外側で参照できる。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   {
       int out;
       {
@@ -1457,7 +1457,7 @@ class Main {
 
 - 内側で宣言した変数は、外側では使えない。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   {
       {
           int in = -10;
@@ -1552,7 +1552,7 @@ class Main {
 9. 変数の定義と初期化を同時に行う方法\\
    [[https://repl.it/@ychubachi/Variable9][Repl.it - Variable9]]
 
-* 式の評価と数値の演算                                                  :#07:
+* 式の評価と数値の演算                                                  :#06:
 ** 式の評価
 
 - 式（Expression）
