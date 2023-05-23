@@ -56,7 +56,7 @@
 :  ("lecture-java1:orgfiles" :publishing-function org-html-publish-to-html :base-directory "~/Dropbox/Org/publish/lecture-java1/" :publishing-directory "/scpx:chubachi@chubachi.sakura.ne.jp:~/www/chubachi.net/lecture-java_1/" :base-extension "org" :recursive t)
 :  ("lecture-java1:others" :publishing-function org-publish-attachment :base-directory "~/Dropbox/Org/publish/lecture-java1/" :publishing-directory "/scpx:chubachi@chubachi.sakura.ne.jp:~/www/chubachi.net/lecture-java_1/" :base-extension "png" :recursive t))
 
-* Java言語の学習方法                                                    :#01:
+* Java言語の学習方法 :#01:
 :PROPERTIES:
 :CUSTOM_ID: no_1
 :END:
@@ -219,7 +219,7 @@
 
 - このように、プログラムには *複数の行を書く* ことができる。
 
-* 字句構造：プログラミングの基礎知識                                    :#02:
+* 字句構造：プログラミングの基礎知識 :#02:
 ** 追加資料
 
 - 日本語資料としておすすめ
