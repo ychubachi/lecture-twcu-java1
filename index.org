@@ -1,4 +1,5 @@
 #+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
+#+OPTIONS: ^:{}
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
 #+EMAIL: yc@aiit.ac.jp
@@ -1508,6 +1509,7 @@ class Main {
     - ○ hello
     - ○ helloWorld
     - ○ helloWorld2
+    - × 2helloWorld
     - × Hello
     - × hello_world
 
@@ -1521,9 +1523,11 @@ class Main {
 
 - 変数名にはUnicodeを用いることもできるが、非推奨
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double π = 3.14;
   System.out.println(π);
+  int 日本語 = 10;
+  System.out.println(日本語);
   // int 😜❤🤷 = -99; // Error!!
 #+end_src
 
@@ -1556,15 +1560,51 @@ class Main {
 ** 式の評価
 
 - 式（Expression）
+  - 計算式
   - [[https://docs.oracle.com/javase/specs/jls/se18/html/jls-15.html#jls-15.8][15. Expressions]]
 
 - 式の評価（Evaluation）
   - 式を計算すること
 
+- 文のなかに「式」が埋め込まれる
+  - 次の「1 + 2」が式
+
+#+begin_src java :results output
+System.out.println(1 + 2);
+#+end_src
+
+- 式を評価するとは？
+  - 計算の結果で式を置き換える
+
+#+begin_src java :results output
+System.out.println(3);
+#+end_src
+
+** 変数の評価
+- 変数の評価
+  - 変数の値を参照し変数を置き換えること
+
+#+begin_src java :results output
+  int x = 123;
+  System.out.println(x);
+#+end_src
+
+#+RESULTS:
+: 123
+
+- 変数を評価する
+
+#+begin_src java :results output
+  System.out.println(123);
+#+end_src
+
+#+RESULTS:
+: 123
+
 ** 数値の演算
 - 整数の加算・減算・乗算
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(1 + 2);
   System.out.println(3 - 4);
   System.out.println(5 * 6);
@@ -1577,7 +1617,7 @@ class Main {
 
 - 整数の除算
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(5 / 3); // 商
   System.out.println(5 % 3); // 余
 #+end_src
@@ -1586,9 +1626,20 @@ class Main {
 : 1
 : 2
 
+#+begin_src java :results output
+    System.out.println(43871028 / 732); // 商
+    System.out.println(43871028 % 732); // 余
+    System.out.println(59933 * 732 + 72); // 検算
+#+end_src
+
+#+RESULTS:
+: 59933
+: 72
+: 43871028
+
 - 実数の加算・減算・乗算（他方が整数であれば実数に変換）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(2 * 3.14 * 5.7);
   System.out.println(0.1 + 0.9);
   System.out.println(2 - (1.9 + 3.2));
@@ -1603,7 +1654,7 @@ class Main {
 
 - 実数の除算（割る数・割られる数のどちらかが実数）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(5.0 / 3);
   System.out.println(2 / .037);
   System.out.println(1e+7 / 10); // 1e+7 = 10,000,000
@@ -1618,7 +1669,7 @@ class Main {
 
 - 変数の値を参照し、計算結果を別の変数に格納
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int height = 7;
   int width = 3;
   int area = height * width;
@@ -1630,7 +1681,7 @@ class Main {
 
 - 変数の値を参照し、計算結果を同じ変数に格納
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int x = 5;
   System.out.println(x);
   x = x * 7;
@@ -1643,13 +1694,16 @@ class Main {
 
 - インクリメント・デクリメント演算子
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 3;
   System.out.println(i);
-  i ++;
+  i ++; // i = i + 1
   System.out.println(i);
-  i --;
+  i --; // i = i - 1
   System.out.println(i);
+
+  // helloWorldILoveYou = helloWorldILoveYou + 1;
+  // helloWorldILoveYou ++;
 #+end_src
 
 #+RESULTS:
@@ -1659,16 +1713,16 @@ class Main {
 
 - 代入演算子
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 3;
   System.out.println(i);
-  i += 2;
+  i += 2; // i = i + 2;
   System.out.println(i);
-  i -= 1;
+  i -= 1; // i = i - 1;
   System.out.println(i);
-  i *= 3;
+  i *= 3; // i = i * 3;
   System.out.println(i);
-  i /= 4;
+  i /= 4; // i = i / 4;
   System.out.println(i);
 #+end_src
 
@@ -1679,24 +1733,24 @@ class Main {
 : 12
 : 3
 
+#+begin_comment
 - 文字の計算（int型の文字コードに変換）;
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char a = 'A';
-  int b = a + 1;
-  int c = a + 2;
-  System.out.println(b);
-  System.out.println(c);
+  System.out.println(a);
+  int i = a;
+  System.out.println(i);
 #+end_src
 
 #+RESULTS:
-: 66
-: 67
+: A
+: 65
 
 - 参考：文字で表示させたいならば
   - =(char)= の意味は後ほど取り扱う
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char a = 'A';
   int b = a + 1;
   int c = a + 2;
@@ -1705,8 +1759,7 @@ class Main {
 #+end_src
 
 #+RESULTS:
-: B
-: C
+#+end_comment
 
 ** COMMENT サンプル
 
@@ -1721,7 +1774,7 @@ class Main {
 - Javaには文字列に使える演算子には「+」しかない
 - もし、「-*/」も使えるようにしたら、どのような機能になるだろうか？
 
-* 論理演算・比較演算                                                    :#08:
+* 論理演算・比較演算 :#07:
 :PROPERTIES:
 :ID:       280201c5-55c5-4e7c-b67a-e818184c0734
 :END:
@@ -1734,7 +1787,7 @@ class Main {
 | true  | false |
 | fales | true  |
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(!true);
   System.out.println(!false);
 #+end_src
@@ -1751,7 +1804,7 @@ class Main {
 | fales | true  | false  |
 | fales | false | false  |
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(true && true);
   System.out.println(true && false);
   System.out.println(false && true);
@@ -1772,7 +1825,7 @@ class Main {
 | fales | true  | true  |
 | fales | false | false |
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println(true || true);
   System.out.println(true || false);
   System.out.println(false || true);
@@ -1787,7 +1840,7 @@ class Main {
 
 - 変数（boolean型）を用いることもできる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   boolean f1 = true;
   boolean f2 = false;
   System.out.println( !f1);
@@ -1819,7 +1872,7 @@ class Main {
 
 - 等しい（==）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 3 == 3 );
   System.out.println( 3 == 5 );
   System.out.println( true == true);
@@ -1834,7 +1887,7 @@ class Main {
 
 - 等しくない（!=）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 3 != 3 );
   System.out.println( 5 != 5 );
   System.out.println( true != true);
@@ -1848,7 +1901,7 @@ class Main {
 : true
 
 - より小さい（小なり） （<）
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 2 < 3 );
   System.out.println( 2 < -3 );
 #+end_src
@@ -1859,7 +1912,7 @@ class Main {
 
 - 以下（<=）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 2 <= 3 );
   System.out.println( 2 <= -3 );
 #+end_src
@@ -1869,7 +1922,7 @@ class Main {
 : false
 
 - より大きい（大なり） （>）
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 2 > 3 );
   System.out.println( 2 > -3 );
 #+end_src
@@ -1879,7 +1932,7 @@ class Main {
 : true
 
 - 以上（>=）
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println( 2 >= 3 );
   System.out.println( 2 >= -3 );
 #+end_src
@@ -1890,7 +1943,7 @@ class Main {
 
 - 変数を用いることもできる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 8;
   int j = -3;
   System.out.println( i == 8);
@@ -1916,14 +1969,14 @@ class Main {
 
 - 比較演算子の組み合わせ
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println((2 > 3) == true );
   System.out.println((2 <= 3) != true );
 #+end_src
 
 - 論理演算子との組み合わせ
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println((2 < 3) && ( 3 < 4));
   System.out.println((2 < 3) || ( 3 <= 4));
 #+end_src
@@ -1984,7 +2037,7 @@ class Main {
   - 拡大変換はどのような場合も上手くいく
   - プログラマーが変換せよと指示しなくても、暗黙的に行われる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 65536;
   long l = i;
   System.out.println(i);
@@ -1995,7 +2048,7 @@ class Main {
 : 65536
 : 65536
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   float f = 3.14F;
   double d = f;
   System.out.println(f); // 3.14
@@ -2006,7 +2059,7 @@ class Main {
 : 3.14
 : 3.140000104904175
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 123456;
   double d = i;
   System.out.println(i); // 123456
@@ -2021,7 +2074,7 @@ class Main {
 
 - char型からの変換時は、文字コード（数値）として扱われる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char c = 'A';
   int i = c;
   System.out.println(i); // 65
@@ -2036,7 +2089,7 @@ class Main {
 
 # - まとめ
 
-# #+begin_src java -n :results output
+# #+begin_src java :results output
 #       byte   b = -17;
 #       short  s = b;
 #       int    i = s;
@@ -2064,7 +2117,7 @@ class Main {
 - 型変換がうまくいかない場合（大きな型から小さな型への変換）
   - *コンパイル時にエラー* になる。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   short s = 654;
   byte b = s; // Error!
   System.out.println(s);
@@ -2073,7 +2126,7 @@ class Main {
 
 #+RESULTS:
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double d = 3.14;
   int i = i; // Error!
   System.out.println(d);
@@ -2112,7 +2165,7 @@ class Main {
   - 型の名前を()で囲む
   - コンパイルエラーはでなくなるが、 期待通りに変換できているかプログラマが注意する必要がある
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 100;
   byte b = (byte) i;
   System.out.println(b);
@@ -2121,7 +2174,7 @@ class Main {
 #+RESULTS:
 : 100
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double pi = 3.14;
   int i = (int) pi;
   System.out.println(i);
@@ -2130,7 +2183,7 @@ class Main {
 #+RESULTS:
 : 3
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double d = 1.0E36;
   float f = (float)d;
   System.out.println(f);
@@ -2142,7 +2195,7 @@ class Main {
 - 直感と異なる型変換が行われる場合
   - 期待通りかどうかはその時次第
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 128;
   byte b = (byte) i;
   System.out.println(b); // -128
@@ -2151,7 +2204,7 @@ class Main {
 #+RESULTS:
 : -128
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double d = 1.0E50;
   float f = (float) d;
   System.out.println(f); // Infinity
@@ -2160,7 +2213,7 @@ class Main {
 #+RESULTS:
 : Infinity
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double d = 1.0E36;
   int i = (int)d;
   System.out.println(i); // 2147483647
@@ -2171,7 +2224,7 @@ class Main {
 
 - 文字コードから文字への変換
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int i = 66;
   char c = (char)i;
   System.out.println(c); // B
@@ -2203,12 +2256,12 @@ class Main {
 
 - 文字列の直値を文字列型の変数に代入
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "こんにちは";
   System.out.println(str);
 #+end_src
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "文字列";   // 変数strを宣言し初期化
   System.out.println(str); // 変数strを参照できる
 #+end_src
@@ -2218,14 +2271,14 @@ class Main {
 
 -  長さ0の文字列を代入する
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "";
   System.out.println(str);
 #+end_src
 
 - 参照型である文字列型にはnullを代入できる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = null;
   System.out.println(str);
 #+end_src
@@ -2242,7 +2295,7 @@ class Main {
 - 文字列の加算
   - 文字列は「+」演算子で加算（連結; concatinate）ができる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String a = "Hello";
   String b = "World";
   String str = a + b;
@@ -2254,7 +2307,7 @@ class Main {
 
 - 文字列の引算・乗算・除算はできない
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String a = "Hello";
   String b = "World";
   // System.out.println(a - b); // Error!!
@@ -2268,7 +2321,7 @@ class Main {
   - 一方が文字列であれば、もう一方は *文字列に変換* される
   - 拡大変換
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int a = 2750;
   String b = "円";
   String str = a + b;
@@ -2278,7 +2331,7 @@ class Main {
 #+RESULTS:
 : 2750円
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String a = "$";
   double b = 3.75;
   String str = a + b;
@@ -2288,7 +2341,7 @@ class Main {
 #+RESULTS:
 : $3.75
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char a = '$';
   double b = 3.75;
   String str = a + b; // Error
@@ -2296,7 +2349,7 @@ class Main {
 
 #+RESULTS:
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int x = 3 * 7;
   System.out.println("3*7=" + x);
 #+end_src
@@ -2304,7 +2357,7 @@ class Main {
 #+RESULTS:
 : 3*7=21
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int  i = 3776;
   char c = '㍍';
   System.out.println("富士山の高さは" + i + c);
@@ -2321,7 +2374,7 @@ class Main {
 
 # - 次はエラーになる（なぜ？）
 
-# #+begin_src java -n :results output
+# #+begin_src java :results output
 #   String hello = "文字列";
 #   System.out.println(hallo); // Error
 # #+end_src
@@ -2361,7 +2414,7 @@ class Main {
 - 文字列の内容が等しいことを調べる操作（equals）
   - 基本型における ====
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str1 = "ABC";
   String str2 = "ABC";
   System.out.println(str1.equals(str2));
@@ -2372,7 +2425,7 @@ class Main {
 
 - =equals= と ==== の違い
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str1 = "あいうえお";
   String str2 = "あいうえお";
   String str3 = "あい";
@@ -2399,7 +2452,7 @@ class Main {
 
 - 文字列の長さを求める操作（length）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "あいうえお";
   System.out.println(str.length());
   str = "ふるいけやかわずとびこむみずのおと";
@@ -2413,7 +2466,7 @@ class Main {
 - 文字列から文字を取り出す操作（charAt）
   - 先頭の文字は0番目と数える
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "あいうえお";
   char ch = str.charAt(0); // char型
   System.out.println(ch);
@@ -2424,7 +2477,7 @@ class Main {
 
 - 文字列から部分文字列を取り出す操作（substring）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str = "あいうえお";
   String sub = str.substring(1,4); // String型
   System.out.println(sub);
@@ -2457,14 +2510,14 @@ class Main {
 
 ** COMMENT プログラムとは、言葉に意味を付ける作業
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   System.out.println("Hello World");
 #+end_src
 
 #+RESULTS:
 : Hello World
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String greeting = "Hello World";
   System.out.println(greeting);
 #+end_src
@@ -2518,7 +2571,7 @@ class Main {
 
 - 型名に =[]= をつける
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] iArray;
   double[] dArray;
   char[] chArray;
@@ -2537,7 +2590,7 @@ class Main {
 
 - 宣言と同時に初期化する際、配列の直値表現で初期化できる。
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] iArray = {0, 1, 2, 3};
   double[] dArray = {1, 1.414, 1.732, 2, 2.236};
   char[] chArray = {'あ','い','う', 'A', 'B'};
@@ -2550,7 +2603,7 @@ class Main {
 
 - 配列変数に番号をつけて参照できる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] iArray = {0, 1, 2, 3};
   System.out.println(iArray[0]);
   System.out.println(iArray[3]);
@@ -2560,7 +2613,7 @@ class Main {
 : 0
 : 3
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String[] strArray = {"こんにちは", "さようなら", "ありがとう", "おやすみ"};
   System.out.println(strArray[2]);
   System.out.println(strArray[3]);
@@ -2574,7 +2627,7 @@ class Main {
 
 - 代入もできる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char[] chArray = {'あ','い','う', 'A', 'B'};
   chArray[1] = 'わ';
   System.out.println(chArray[1]);
@@ -2586,7 +2639,7 @@ class Main {
 - 番号が長さを超えた場合
   - *実行時例外* になる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double[] dArray = {1, 1.414, 1.732, 2, 2.236};
   System.out.println(dArray[5]); // 実行時に例外
   System.out.println(dArray[-1]); // 実行時に例外
@@ -2597,7 +2650,7 @@ class Main {
 ** 変数を用いた要素の指定
 - 番号に整数型の変数を用いることができる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   double[] dArray = {1, 1.414, 1.732, 2, 2.236};
   int i = 0;
   System.out.println(dArray[i]);
@@ -2620,7 +2673,7 @@ class Main {
   - 225次元までらしい
     - [[https://docs.oracle.com/javase/jp/8/docs/api/java/lang/reflect/Array.html][Array (Java Platform SE 8 )]]
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[][] image = {{1,0,1},
                    {0,1,0},
                    {1,0,1}};
@@ -2636,7 +2689,7 @@ class Main {
 
 - ドット表記で配列の長さを求めることができる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] array = {2, 3, 5, 7, 11, 13, 17, 19};
   System.out.println(array.length);
 #+end_src
@@ -2646,7 +2699,7 @@ class Main {
 
 - 二次元配列の長さ
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[][] image = {{1,0,1,0},
                    {0,1,0,1},
                    {1,0,1,1}};
@@ -2677,7 +2730,7 @@ class Main {
 
 - 配列を文字列に変換する
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] array = {2, 3, 5, 7, 11, 13, 17, 19};
   System.out.println(Arrays.toString(array));
 #+end_src
@@ -2687,7 +2740,7 @@ class Main {
 
 - 要素が変更されたことを確認
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] array = {2, 3, 5, 7, 11, 13, 17, 19};
   array[3] = 0;
   System.out.println(Arrays.toString(array));
@@ -2698,7 +2751,7 @@ class Main {
 
 - 多次元配列の場合
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[][] image = {{1,0,1,0},
                    {0,1,0,1},
                    {1,0,1,1}};
@@ -3096,7 +3149,7 @@ if a then b
 
 - Java言語での表現
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   boolean cond1 = true;
   boolean cond2 = true;
   boolean cond3 = true;
@@ -4030,7 +4083,7 @@ stop
 
 - 文字列型の初期化
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   String str;
   str = new String();
 #+end_src
@@ -4039,7 +4092,7 @@ stop
 
 - 個数だけ指定し中身は空の配列の定義（new演算子を使う）
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] i = new int[10];
   double[] d = new double[10];
   String[] str = new String[20];
@@ -4049,7 +4102,7 @@ stop
 
 - 長さ1万の配列も作れる
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   int[] iArray = new int[10000];
 #+end_src
 
@@ -4057,7 +4110,7 @@ stop
 
 - 文字の配列から文字列を生成
 
-#+begin_src java -n :results output
+#+begin_src java :results output
   char data[] = {'a', 'b', 'c'};
   String str = new String(data);
 #+end_src
