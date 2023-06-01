@@ -1801,7 +1801,7 @@ System.out.println(3);
 :END:
 
 ** 論理演算子（logical operators）
-- boolean型の値に対して行う演算
+- 真偽値（boolean型の値）に対して行う演算
 
   #+begin_src java :results output
     System.out.println(true);
