@@ -1,4 +1,4 @@
-#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
+be#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
 #+OPTIONS: ^:{}
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
@@ -1665,6 +1665,27 @@ System.out.println(3);
 : 54.054054054054056
 : 1000000.0
 
+- 実数の計算の例
+
+#+begin_src java :results output
+    System.out.println(5 / 3);
+    System.out.println(5 % 3);
+
+    System.out.println(5.0 / 3);
+    System.out.println(5D / 3);
+    System.out.println(5F / 3);
+
+    System.out.println(5.0 % 2.5);
+#+end_src
+
+#+RESULTS:
+: 1
+: 2
+: 1.6666666666666667
+: 1.6666666666666667
+: 1.6666666
+: 0.0
+
 ** 変数の演算と結果の代入
 
 - 変数の値を参照し、計算結果を別の変数に格納
@@ -1780,6 +1801,12 @@ System.out.println(3);
 :END:
 
 ** 論理演算子（logical operators）
+- boolean型の値に対して行う演算
+
+  #+begin_src java :results output
+    System.out.println(true);
+    System.out.println(false);
+  #+end_src
 
 - 否定（not）
 
@@ -1798,11 +1825,11 @@ System.out.println(3);
 
 - 論理積（and）
 
-| a     | b     | a && a |
+| a     | b     | a && b |
 | true  | true  | true   |
 | true  | false | false  |
-| fales | true  | false  |
-| fales | false | false  |
+| false | true  | false  |
+| false | false | false  |
 
 #+begin_src java :results output
   System.out.println(true && true);
@@ -1822,8 +1849,8 @@ System.out.println(3);
 | a     | b     | a\vert{}\vert{}b  |
 | true  | true  | true  |
 | true  | false | true  |
-| fales | true  | true  |
-| fales | false | false |
+| false | true  | true  |
+| false | false | false |
 
 #+begin_src java :results output
   System.out.println(true || true);
@@ -1862,13 +1889,14 @@ System.out.println(3);
 
 # 左辺と右辺の値を比較し、その結果をtrue／falseで返します。一般的には、制御構文と合わせて利用します。
 
-| 演算子 | 概要                           | *例*              |
-| ==     | 左辺と右辺が等しければtrue     | 5 == 5 // true  |
-| !=     | 左辺と右辺が等しくなければtrue | 5 != 5 // false |
-| <      | 左辺が右辺より小さければtrue   | 5 < 7 // true   |
-| <=     | 左辺が右辺以下であればtrue     | 5 <= 3 // false |
-| >      | 左辺が右辺より大きければtrue   | 7 > 5 // true   |
-| >=     | 左辺が右辺以上であればtrue     | 5 >= 7 // false |
+| 演算子 | 概要                           | *例*      |
+|--------+--------------------------------+---------|
+| ==     | 左辺と右辺が等しければtrue     | 5 == 5  |
+| !=     | 左辺と右辺が等しくなければtrue | 5 != 5  |
+| <      | 左辺が右辺より小さければtrue   | 5 < 7   |
+| <=     | 左辺が右辺以下であればtrue     | 5 <= 3  |
+| >      | 左辺が右辺より大きければtrue   | 7 > 5   |
+| >=     | 左辺が右辺以上であればtrue     | 5 >= 7  |
 
 - 等しい（==）
 
@@ -1958,6 +1986,13 @@ System.out.println(3);
 : true
 : true
 
+- 比較演算の結果をboolean型の変数に代入できる
+
+#+begin_src java :results output
+  boolean flag = 3 < 5;
+  System.out.println(flag);
+#+end_src
+
 ** 比較演算子と論理演算子の組み合わせ
 :PROPERTIES:
 :CUSTOM_ID: 比較演算子と論理演算子の組み合わせ
@@ -1970,9 +2005,15 @@ System.out.println(3);
 - 比較演算子の組み合わせ
 
 #+begin_src java :results output
-  System.out.println((2 > 3) == true );
-  System.out.println((2 <= 3) != true );
+  System.out.println(true == true );
+  System.out.println( 2 < 5 );
+  System.out.println(( 2 < 5 ) == true );
 #+end_src
+
+#+RESULTS:
+: true
+: true
+: true
 
 - 論理演算子との組み合わせ
 
@@ -1997,6 +2038,28 @@ System.out.println(3);
 比較演算子は基本型にしか使えない（と覚えておこう）。例えば、文字列型の値を比較する際に ==== を使うと、予期しない結果になることがある。コンパイルは通るので、間違うと深刻なバグの原因となり得る。なお、文字列型には比較をするための専用の方法があるので、別途、解説する。
 #+end_warning
 
+- 変数と組み合わせる
+
+#+begin_src java :results output
+  int score = 95;
+  System.out.println(score > 60);
+#+end_src
+
+#+RESULTS:
+: true
+
+- 少し複雑な例
+
+#+begin_src java :results output
+    int average = (87 + 63 + 76 + 91) / 4;
+    System.out.println(average);
+    System.out.println(average >= 60);
+#+end_src
+
+#+RESULTS:
+: 79
+: true
+
 *** COMMENT サンプルコード
 :PROPERTIES:
 :CUSTOM_ID: サンプルコード-1
@@ -2005,6 +2068,52 @@ System.out.println(3);
 - [[https://repl.it/@ychubachi/Bi-Jiao-Yan-Suan-Zi-comparison-operators][Repl.it -
   比較演算子（comparison operators）]]
 
+#+begin_src java :results output
+ double x, y;
+    x = 2.23;
+    y = 2.24;
+
+    /*
+    // 等しい
+    System.out.println( 1    == 1    );
+    System.out.println( x    == y    );
+    System.out.println( true == false);
+
+    // 等しくない
+    System.out.println( 1    != 1    );
+    System.out.println( x    != y    );
+    System.out.println( true != false);
+
+    // より小さい（小なり）
+    System.out.println( 2 <  3 );
+    System.out.println( 2 <  2 );
+    System.out.println( 2 < -3 );
+    System.out.println( x <  y );
+
+    // 以下
+    System.out.println( 2 <=  3 );
+    System.out.println( 2 <=  2 );
+    System.out.println( 2 <= -3 );
+    System.out.println( x <=  y );
+
+    // より大きい（大なり）
+    System.out.println( 2 >  3 );
+    System.out.println( 2 > -3 );
+    System.out.println( x >  y );
+
+    // 以上
+    System.out.println( 2 >=  3 );
+    System.out.println( 2 >= -3 );
+    System.out.println( x >=  y );
+    */
+
+    // 計算式との組み合わせ
+    int i = 28;
+    int j = 17;
+    System.out.println( (i % 2) == 0 ); // 偶数？
+    System.out.println( (j % 2) == 0 ); // 偶数？
+#+end_src
+
 *** COMMENT サンプルコード
 :PROPERTIES:
 :CUSTOM_ID: サンプルコード-2
@@ -2012,6 +2121,30 @@ System.out.println(3);
 
 - [[https://repl.it/@ychubachi/Bi-Jiao-Yan-Suan-Zi-toLun-Li-Yan-Suan-Zi-noZu-miHe-wase#Main.java][Repl.it -
   比較演算子と論理演算子の組み合わせ]]
+
+#+begin_src java :results output
+    int i =  6;
+    int j = -2;
+
+
+    /*
+    // 0より大きく、かつ、5以下
+    System.out.println( ( 0 < i ) && ( i <= 5 ) );
+    System.out.println( ( 0 < j ) && ( j <= 5 ) );
+    // System.out.println( 0 < i <= 5 ); // ×
+
+    // 0以下、または、5より大きい
+    System.out.println( i <= 0 || 5 < i );
+    System.out.println( j <= 0 || 5 < j );
+    */
+
+    // 「0より大きく、かつ、5以下」でない
+    System.out.println( !( 0 < i && i <= 5 ) );
+    System.out.println( !( 0 < j && j <= 5 ) );
+    // System.out.println( i <= 0 || 5 < i );
+    // System.out.println( 0 >= i || i > 5 );
+  }
+#+end_src
 
 * 型変換
 ** 型変換（type casting）
