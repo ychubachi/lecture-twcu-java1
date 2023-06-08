@@ -1812,7 +1812,7 @@ System.out.println(3);
 
 | a     | !a    |
 | true  | false |
-| fales | true  |
+| false | true  |
 
 #+begin_src java :results output
   System.out.println(!true);
@@ -2060,6 +2060,13 @@ System.out.println(3);
 : 79
 : true
 
+- 次のコードはエラー
+  - 理由を知りたい人は「Java 演算子 優先順位」で検索
+
+#+begin_src java :results output
+System.out.println(! 10 > 5);
+#+end_src
+
 *** COMMENT サンプルコード
 :PROPERTIES:
 :CUSTOM_ID: サンプルコード-1
@@ -2146,7 +2153,7 @@ System.out.println(3);
   }
 #+end_src
 
-* 型変換
+* 型変換 :#08:
 ** 型変換（type casting）
 
 - 異なる型の値同士を変換することができる
@@ -2261,7 +2268,7 @@ System.out.println(3);
 
 #+begin_src java :results output
   double d = 3.14;
-  int i = i; // Error!
+  int i = d; // Error!
   System.out.println(d);
   System.out.println(i);
 #+end_src
@@ -2307,6 +2314,20 @@ System.out.println(3);
 #+RESULTS:
 : 100
 
+- 桁溢れ（over flow）する場合
+
+#+begin_src java :results output
+    // 00000000 ~ 11111111 (2進数)
+    // -128     ~ 127 (10進数)
+    // 11111111 + 1 = 100000000 (9bit)
+    int i = 128;
+    byte b = (byte) i;
+    System.out.println(b);
+#+end_src
+
+#+RESULTS:
+: -128
+
 #+begin_src java :results output
   double pi = 3.14;
   int i = (int) pi;
@@ -2338,7 +2359,7 @@ System.out.println(3);
 : -128
 
 #+begin_src java :results output
-  double d = 1.0E50;
+  double d = 1.0E39;
   float f = (float) d;
   System.out.println(f); // Infinity
 #+end_src
@@ -2371,9 +2392,7 @@ System.out.println(3);
 :CUSTOM_ID: section-3
 :END:
 
-- （前回の続き）
-
-- 文字列型は参照型（reference type）に分類される。
+- 文字列型は参照型（reference type）に分類される型である。
   - 基本型（primitive type）ではない。
 
 - 参照型は、基本型の組み合わせで作られる
