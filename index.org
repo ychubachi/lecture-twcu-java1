@@ -1,4 +1,4 @@
-be#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
+#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
 #+OPTIONS: ^:{}
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
@@ -2424,9 +2424,12 @@ System.out.println(! 10 > 5);
 -  長さ0の文字列を代入する
 
 #+begin_src java :results output
-  String str = "";
+  String str = ""; // 空文字列
   System.out.println(str);
 #+end_src
+
+#+RESULTS:
+:
 
 - 参照型である文字列型にはnullを代入できる
 
@@ -2457,6 +2460,17 @@ System.out.println(! 10 > 5);
 #+RESULTS:
 : HelloWorld
 
+#+begin_src java :results output
+    String a = "Hello";
+    String b = "World";
+    String space = " ";
+    String str = a + space + b;
+    System.out.println(str);
+#+end_src
+
+#+RESULTS:
+: Hello World
+
 - 文字列の引算・乗算・除算はできない
 
 #+begin_src java :results output
@@ -2471,7 +2485,7 @@ System.out.println(! 10 > 5);
 
 - 文字列と基本形の加算
   - 一方が文字列であれば、もう一方は *文字列に変換* される
-  - 拡大変換
+  - これは文字列の加算（連結）の際に行われる特別な、型の拡大変換である
 
 #+begin_src java :results output
   int a = 2750;
@@ -2482,6 +2496,11 @@ System.out.println(! 10 > 5);
 
 #+RESULTS:
 : 2750円
+
+#+begin_note
+  - そもそもすべての数値（int型、double型など）は文字列に変換できるようになっている
+  - そうでなければ結果を画面に表示できない
+#+end_note
 
 #+begin_src java :results output
   String a = "$";
@@ -2518,6 +2537,35 @@ System.out.println(! 10 > 5);
 #+RESULTS:
 : 富士山の高さは3776㍍
 
+#+begin_src java :results output
+    double pi = 3.1415926534;
+    String s1 = "π=";
+    String s2 = s1 + pi;
+    System.out.println(s2);
+#+end_src
+
+#+RESULTS:
+: π=3.1415926534
+
+#+begin_src java :results output
+    double pi = 3.1415926534;
+    String s1 = "" + pi;
+    System.out.println(s1);
+#+end_src
+
+#+RESULTS:
+: 3.1415926534
+
+#+begin_src java :results output
+    char a = '$';
+    double b = 3.75;
+    double c = a + b;
+    System.out.println(c);
+#+end_src
+
+#+RESULTS:
+: 39.75
+
 #   String str = "文字列";
 #   System.out.println(str);
 
@@ -2550,6 +2598,19 @@ System.out.println(! 10 > 5);
   情報をオブジェクトとして取り扱うことがオブジェクト指向言語の特徴
 #+end_note
 
+- 文字列の加算（連結）をよりオブジェクト指向らしく表現すると次の通り。
+
+#+begin_src java :results output
+  String s1 = "abc";
+  String s2 = "def";
+  String s3 = s1.concat(s2); // s1 + s2 と同じ意味
+  // String s3 = s2.concat(s1); // 結果が逆になる
+  System.out.println(s3);
+#+end_src
+
+#+RESULTS:
+: abcdef
+
 - ドット表記（dot notitation）
   - =object.method()= という表現でオブジェクトを操作できる
   - dotとはピリオド記号のこと
@@ -2561,6 +2622,7 @@ System.out.println(! 10 > 5);
   - オブジェクトを操作するために追加で必要な情報
   - =object.method(arg1, arg2)= のように，操作に応じて必要な引数の数は異なる
 
+* 文字列の比較や長さ :#10:
 ** 文字列オブジェクトの比較
 
 - 文字列の内容が等しいことを調べる操作（equals）
