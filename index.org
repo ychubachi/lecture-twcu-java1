@@ -3,7 +3,7 @@
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
 #+EMAIL: yc@aiit.ac.jp
-#+DATE: 2022 春学期
+#+DATE: 2023 春学期
 #+OPTIONS: html-style:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://chubachi.net/org-html-themes/src/readtheorg_theme/css/htmlize.css" />
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://chubachi.net/org-html-themes/src/readtheorg_theme/css/readtheorg.css" />
