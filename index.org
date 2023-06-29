@@ -2787,6 +2787,25 @@ System.out.println(! 10 > 5);
   - 一昔前のパソコンのようにメモリーが4Gバイトなら32bitの変数で参照可能
   - 今時のパソコンは8G、16Gなどもっとメモリーが多いので64bitの変数を使う
 
+** ここまでで作れるプログラムの例（参考）
+
+#+begin_src java :results output
+class Main {
+  public static void main(String[] args) {
+    double taijuu = 80.0;
+    double shinchou = 1.7;
+
+    double bmi = taijuu / (shinchou * shinchou);
+    System.out.println("あなたのBMIは" + bmi + "です");
+    System.out.println("普通体重？ = " + ((18.5 <= bmi) && (bmi < 25.0)));
+  }
+}
+#+end_src
+
+#+RESULTS:
+: あなたのBMIは27.68166089965398です
+: 普通体重？ = false
+
 * 配列型（Array） :#11:
 ** 配列とは？
 
@@ -2858,6 +2877,17 @@ System.out.println(! 10 > 5);
 : ありがとう
 : おやすみ
 
+- 番号が長さを超えた場合
+  - *実行時例外* になる
+
+#+begin_src java :results output
+  double[] dArray = {1, 1.414, 1.732, 2, 2.236};
+  System.out.println(dArray[5]); // 実行時に例外
+  System.out.println(dArray[-1]); // 実行時に例外
+#+end_src
+
+#+RESULTS:
+
 ** 配列の要素に代入する
 
 - 代入もできる
@@ -2870,17 +2900,6 @@ System.out.println(! 10 > 5);
 
 #+RESULTS:
 : わ
-
-- 番号が長さを超えた場合
-  - *実行時例外* になる
-
-#+begin_src java :results output
-  double[] dArray = {1, 1.414, 1.732, 2, 2.236};
-  System.out.println(dArray[5]); // 実行時に例外
-  System.out.println(dArray[-1]); // 実行時に例外
-#+end_src
-
-#+RESULTS:
 
 ** 変数を用いた要素の指定
 - 番号に整数型の変数を用いることができる
