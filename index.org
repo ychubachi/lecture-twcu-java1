@@ -3015,7 +3015,7 @@ class Main {
 #+RESULTS:
 : [[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 1]]
 
-* 構造化プログラミング1                                                 :#11:
+* 構造化プログラミング1
 ** プログラムの制御構造
 *** 条件分岐とジャンプ
 - 条件分岐
@@ -3466,7 +3466,6 @@ if a then b
 - [[https://repl.it/@ychubachi/Tiao-Jian-Fen-Qi-Fu-Shu-noFen-Qi-Xian][Repl.it -
   条件分岐（複数の分岐先）]]
 
-* 構造化プログラミング2                                                 :#12:
 ** 反復（repetition）
 :PROPERTIES:
 :ID:       003dca48-4e0a-4f2f-9d4e-d5a7e61ae306
@@ -3587,6 +3586,10 @@ stop
 : i=-4
 : i=-8
 : i=-16
+
+* 構造化プログラミング2 :#12:
+
+** 反復の続き
 
 *** 反復を用いた配列の処理
 - 配列のすべての要素を参照
@@ -3862,7 +3865,7 @@ stop
 - [[https://repl.it/@ychubachi/Zao-riFan-siHou-Zhi-Pan-Ding][Repl.it - 繰り返し（後置判定）]]
 - [[https://repl.it/@ychubachi/Zao-riFan-siZhong-Zhi-Pan-Ding][Repl.it - 繰り返し（中置判定）]]
 
-* 構造化プログラミング3                                                 :#13:
+* 構造化プログラミング4 :#13:
 ** 例外（Exception Handling）
 *** 例外とは？
 - 正常に処理が行えなくなった場合、例外を発生させる
