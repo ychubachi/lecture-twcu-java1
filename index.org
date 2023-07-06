@@ -3,7 +3,7 @@
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
 #+EMAIL: yc@aiit.ac.jp
-#+DATE: 2022 春学期
+#+DATE: 2023 春学期
 #+OPTIONS: html-style:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://chubachi.net/org-html-themes/src/readtheorg_theme/css/htmlize.css" />
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://chubachi.net/org-html-themes/src/readtheorg_theme/css/readtheorg.css" />
@@ -1665,6 +1665,27 @@ System.out.println(3);
 : 54.054054054054056
 : 1000000.0
 
+- 実数の計算の例
+
+#+begin_src java :results output
+    System.out.println(5 / 3);
+    System.out.println(5 % 3);
+
+    System.out.println(5.0 / 3);
+    System.out.println(5D / 3);
+    System.out.println(5F / 3);
+
+    System.out.println(5.0 % 2.5);
+#+end_src
+
+#+RESULTS:
+: 1
+: 2
+: 1.6666666666666667
+: 1.6666666666666667
+: 1.6666666
+: 0.0
+
 ** 変数の演算と結果の代入
 
 - 変数の値を参照し、計算結果を別の変数に格納
@@ -1780,12 +1801,18 @@ System.out.println(3);
 :END:
 
 ** 論理演算子（logical operators）
+- 真偽値（boolean型の値）に対して行う演算
+
+  #+begin_src java :results output
+    System.out.println(true);
+    System.out.println(false);
+  #+end_src
 
 - 否定（not）
 
 | a     | !a    |
 | true  | false |
-| fales | true  |
+| false | true  |
 
 #+begin_src java :results output
   System.out.println(!true);
@@ -1798,11 +1825,11 @@ System.out.println(3);
 
 - 論理積（and）
 
-| a     | b     | a && a |
+| a     | b     | a && b |
 | true  | true  | true   |
 | true  | false | false  |
-| fales | true  | false  |
-| fales | false | false  |
+| false | true  | false  |
+| false | false | false  |
 
 #+begin_src java :results output
   System.out.println(true && true);
@@ -1822,8 +1849,8 @@ System.out.println(3);
 | a     | b     | a\vert{}\vert{}b  |
 | true  | true  | true  |
 | true  | false | true  |
-| fales | true  | true  |
-| fales | false | false |
+| false | true  | true  |
+| false | false | false |
 
 #+begin_src java :results output
   System.out.println(true || true);
@@ -1862,13 +1889,14 @@ System.out.println(3);
 
 # 左辺と右辺の値を比較し、その結果をtrue／falseで返します。一般的には、制御構文と合わせて利用します。
 
-| 演算子 | 概要                           | *例*              |
-| ==     | 左辺と右辺が等しければtrue     | 5 == 5 // true  |
-| !=     | 左辺と右辺が等しくなければtrue | 5 != 5 // false |
-| <      | 左辺が右辺より小さければtrue   | 5 < 7 // true   |
-| <=     | 左辺が右辺以下であればtrue     | 5 <= 3 // false |
-| >      | 左辺が右辺より大きければtrue   | 7 > 5 // true   |
-| >=     | 左辺が右辺以上であればtrue     | 5 >= 7 // false |
+| 演算子 | 概要                           | *例*     |
+|--------+--------------------------------+--------|
+| ==     | 左辺と右辺が等しければtrue     | 5 == 5 |
+| !=     | 左辺と右辺が等しくなければtrue | 5 != 5 |
+| <      | 左辺が右辺より小さければtrue   | 5 < 7  |
+| <=     | 左辺が右辺以下であればtrue     | 5 <= 3 |
+| >      | 左辺が右辺より大きければtrue   | 7 > 5  |
+| >=     | 左辺が右辺以上であればtrue     | 5 >= 7 |
 
 - 等しい（==）
 
@@ -1958,6 +1986,13 @@ System.out.println(3);
 : true
 : true
 
+- 比較演算の結果をboolean型の変数に代入できる
+
+#+begin_src java :results output
+  boolean flag = 3 < 5;
+  System.out.println(flag);
+#+end_src
+
 ** 比較演算子と論理演算子の組み合わせ
 :PROPERTIES:
 :CUSTOM_ID: 比較演算子と論理演算子の組み合わせ
@@ -1970,9 +2005,15 @@ System.out.println(3);
 - 比較演算子の組み合わせ
 
 #+begin_src java :results output
-  System.out.println((2 > 3) == true );
-  System.out.println((2 <= 3) != true );
+  System.out.println(true == true );
+  System.out.println( 2 < 5 );
+  System.out.println(( 2 < 5 ) == true );
 #+end_src
+
+#+RESULTS:
+: true
+: true
+: true
 
 - 論理演算子との組み合わせ
 
@@ -1997,6 +2038,35 @@ System.out.println(3);
 比較演算子は基本型にしか使えない（と覚えておこう）。例えば、文字列型の値を比較する際に ==== を使うと、予期しない結果になることがある。コンパイルは通るので、間違うと深刻なバグの原因となり得る。なお、文字列型には比較をするための専用の方法があるので、別途、解説する。
 #+end_warning
 
+- 変数と組み合わせる
+
+#+begin_src java :results output
+  int score = 95;
+  System.out.println(score > 60);
+#+end_src
+
+#+RESULTS:
+: true
+
+- 少し複雑な例
+
+#+begin_src java :results output
+    int average = (87 + 63 + 76 + 91) / 4;
+    System.out.println(average);
+    System.out.println(average >= 60);
+#+end_src
+
+#+RESULTS:
+: 79
+: true
+
+- 次のコードはエラー
+  - 理由を知りたい人は「Java 演算子 優先順位」で検索
+
+#+begin_src java :results output
+System.out.println(! 10 > 5);
+#+end_src
+
 *** COMMENT サンプルコード
 :PROPERTIES:
 :CUSTOM_ID: サンプルコード-1
@@ -2004,6 +2074,52 @@ System.out.println(3);
 
 - [[https://repl.it/@ychubachi/Bi-Jiao-Yan-Suan-Zi-comparison-operators][Repl.it -
   比較演算子（comparison operators）]]
+
+#+begin_src java :results output
+ double x, y;
+    x = 2.23;
+    y = 2.24;
+
+    /*
+    // 等しい
+    System.out.println( 1    == 1    );
+    System.out.println( x    == y    );
+    System.out.println( true == false);
+
+    // 等しくない
+    System.out.println( 1    != 1    );
+    System.out.println( x    != y    );
+    System.out.println( true != false);
+
+    // より小さい（小なり）
+    System.out.println( 2 <  3 );
+    System.out.println( 2 <  2 );
+    System.out.println( 2 < -3 );
+    System.out.println( x <  y );
+
+    // 以下
+    System.out.println( 2 <=  3 );
+    System.out.println( 2 <=  2 );
+    System.out.println( 2 <= -3 );
+    System.out.println( x <=  y );
+
+    // より大きい（大なり）
+    System.out.println( 2 >  3 );
+    System.out.println( 2 > -3 );
+    System.out.println( x >  y );
+
+    // 以上
+    System.out.println( 2 >=  3 );
+    System.out.println( 2 >= -3 );
+    System.out.println( x >=  y );
+    */
+
+    // 計算式との組み合わせ
+    int i = 28;
+    int j = 17;
+    System.out.println( (i % 2) == 0 ); // 偶数？
+    System.out.println( (j % 2) == 0 ); // 偶数？
+#+end_src
 
 *** COMMENT サンプルコード
 :PROPERTIES:
@@ -2013,7 +2129,31 @@ System.out.println(3);
 - [[https://repl.it/@ychubachi/Bi-Jiao-Yan-Suan-Zi-toLun-Li-Yan-Suan-Zi-noZu-miHe-wase#Main.java][Repl.it -
   比較演算子と論理演算子の組み合わせ]]
 
-* 型変換
+#+begin_src java :results output
+    int i =  6;
+    int j = -2;
+
+
+    /*
+    // 0より大きく、かつ、5以下
+    System.out.println( ( 0 < i ) && ( i <= 5 ) );
+    System.out.println( ( 0 < j ) && ( j <= 5 ) );
+    // System.out.println( 0 < i <= 5 ); // ×
+
+    // 0以下、または、5より大きい
+    System.out.println( i <= 0 || 5 < i );
+    System.out.println( j <= 0 || 5 < j );
+    */
+
+    // 「0より大きく、かつ、5以下」でない
+    System.out.println( !( 0 < i && i <= 5 ) );
+    System.out.println( !( 0 < j && j <= 5 ) );
+    // System.out.println( i <= 0 || 5 < i );
+    // System.out.println( 0 >= i || i > 5 );
+  }
+#+end_src
+
+* 型変換 :#08:
 ** 型変換（type casting）
 
 - 異なる型の値同士を変換することができる
@@ -2128,7 +2268,7 @@ System.out.println(3);
 
 #+begin_src java :results output
   double d = 3.14;
-  int i = i; // Error!
+  int i = d; // Error!
   System.out.println(d);
   System.out.println(i);
 #+end_src
@@ -2174,6 +2314,20 @@ System.out.println(3);
 #+RESULTS:
 : 100
 
+- 桁溢れ（over flow）する場合
+
+#+begin_src java :results output
+    // 00000000 ~ 11111111 (2進数)
+    // -128     ~ 127 (10進数)
+    // 11111111 + 1 = 100000000 (9bit)
+    int i = 128;
+    byte b = (byte) i;
+    System.out.println(b);
+#+end_src
+
+#+RESULTS:
+: -128
+
 #+begin_src java :results output
   double pi = 3.14;
   int i = (int) pi;
@@ -2205,7 +2359,7 @@ System.out.println(3);
 : -128
 
 #+begin_src java :results output
-  double d = 1.0E50;
+  double d = 1.0E39;
   float f = (float) d;
   System.out.println(f); // Infinity
 #+end_src
@@ -2238,9 +2392,7 @@ System.out.println(3);
 :CUSTOM_ID: section-3
 :END:
 
-- （前回の続き）
-
-- 文字列型は参照型（reference type）に分類される。
+- 文字列型は参照型（reference type）に分類される型である。
   - 基本型（primitive type）ではない。
 
 - 参照型は、基本型の組み合わせで作られる
@@ -2272,9 +2424,12 @@ System.out.println(3);
 -  長さ0の文字列を代入する
 
 #+begin_src java :results output
-  String str = "";
+  String str = ""; // 空文字列
   System.out.println(str);
 #+end_src
+
+#+RESULTS:
+:
 
 - 参照型である文字列型にはnullを代入できる
 
@@ -2305,6 +2460,17 @@ System.out.println(3);
 #+RESULTS:
 : HelloWorld
 
+#+begin_src java :results output
+    String a = "Hello";
+    String b = "World";
+    String space = " ";
+    String str = a + space + b;
+    System.out.println(str);
+#+end_src
+
+#+RESULTS:
+: Hello World
+
 - 文字列の引算・乗算・除算はできない
 
 #+begin_src java :results output
@@ -2319,7 +2485,7 @@ System.out.println(3);
 
 - 文字列と基本形の加算
   - 一方が文字列であれば、もう一方は *文字列に変換* される
-  - 拡大変換
+  - これは文字列の加算（連結）の際に行われる特別な、型の拡大変換である
 
 #+begin_src java :results output
   int a = 2750;
@@ -2330,6 +2496,11 @@ System.out.println(3);
 
 #+RESULTS:
 : 2750円
+
+#+begin_note
+  - そもそもすべての数値（int型、double型など）は文字列に変換できるようになっている
+  - そうでなければ結果を画面に表示できない
+#+end_note
 
 #+begin_src java :results output
   String a = "$";
@@ -2366,6 +2537,35 @@ System.out.println(3);
 #+RESULTS:
 : 富士山の高さは3776㍍
 
+#+begin_src java :results output
+    double pi = 3.1415926534;
+    String s1 = "π=";
+    String s2 = s1 + pi;
+    System.out.println(s2);
+#+end_src
+
+#+RESULTS:
+: π=3.1415926534
+
+#+begin_src java :results output
+    double pi = 3.1415926534;
+    String s1 = "" + pi;
+    System.out.println(s1);
+#+end_src
+
+#+RESULTS:
+: 3.1415926534
+
+#+begin_src java :results output
+    char a = '$';
+    double b = 3.75;
+    double c = a + b;
+    System.out.println(c);
+#+end_src
+
+#+RESULTS:
+: 39.75
+
 #   String str = "文字列";
 #   System.out.println(str);
 
@@ -2398,6 +2598,19 @@ System.out.println(3);
   情報をオブジェクトとして取り扱うことがオブジェクト指向言語の特徴
 #+end_note
 
+- 文字列の加算（連結）をよりオブジェクト指向らしく表現すると次の通り。
+
+#+begin_src java :results output
+  String s1 = "abc";
+  String s2 = "def";
+  String s3 = s1.concat(s2); // s1 + s2 と同じ意味
+  // String s3 = s2.concat(s1); // 結果が逆になる
+  System.out.println(s3);
+#+end_src
+
+#+RESULTS:
+: abcdef
+
 - ドット表記（dot notitation）
   - =object.method()= という表現でオブジェクトを操作できる
   - dotとはピリオド記号のこと
@@ -2409,6 +2622,7 @@ System.out.println(3);
   - オブジェクトを操作するために追加で必要な情報
   - =object.method(arg1, arg2)= のように，操作に応じて必要な引数の数は異なる
 
+* 文字列の比較や長さ :#10:
 ** 文字列オブジェクトの比較
 
 - 文字列の内容が等しいことを調べる操作（equals）
@@ -2475,16 +2689,37 @@ System.out.println(3);
 #+RESULTS:
 : あ
 
+- 文字列の長さを超えて取り出すことはできない
+
+#+begin_src java :results output
+    String str = "あいうえお";
+    char ch = str.charAt(5);
+    System.out.println(ch);
+#+end_src
+
+#+RESULTS:
+
 - 文字列から部分文字列を取り出す操作（substring）
 
 #+begin_src java :results output
   String str = "あいうえお";
-  String sub = str.substring(1,4); // String型
+  String sub = str.substring(1);
   System.out.println(sub);
 #+end_src
 
 #+RESULTS:
-: いうえ
+: いうえお
+
+- 任意の範囲
+
+#+begin_src java :results output
+    String str = "０１２３４５６７８９";
+    String sub = str.substring(3, 6);
+    System.out.println(sub);
+#+end_src
+
+#+RESULTS:
+: ３４５
 
 ** 文字列オブジェクトの様々な操作
 
@@ -2552,7 +2787,26 @@ System.out.println(3);
   - 一昔前のパソコンのようにメモリーが4Gバイトなら32bitの変数で参照可能
   - 今時のパソコンは8G、16Gなどもっとメモリーが多いので64bitの変数を使う
 
-* 配列型（Array）                                                       :#10:
+** ここまでで作れるプログラムの例（参考）
+
+#+begin_src java :results output
+class Main {
+  public static void main(String[] args) {
+    double taijuu = 80.0;
+    double shinchou = 1.7;
+
+    double bmi = taijuu / (shinchou * shinchou);
+    System.out.println("あなたのBMIは" + bmi + "です");
+    System.out.println("普通体重？ = " + ((18.5 <= bmi) && (bmi < 25.0)));
+  }
+}
+#+end_src
+
+#+RESULTS:
+: あなたのBMIは27.68166089965398です
+: 普通体重？ = false
+
+* 配列型（Array） :#11:
 ** 配列とは？
 
 - *配列* とは？
@@ -2623,6 +2877,17 @@ System.out.println(3);
 : ありがとう
 : おやすみ
 
+- 番号が長さを超えた場合
+  - *実行時例外* になる
+
+#+begin_src java :results output
+  double[] dArray = {1, 1.414, 1.732, 2, 2.236};
+  System.out.println(dArray[5]); // 実行時に例外
+  System.out.println(dArray[-1]); // 実行時に例外
+#+end_src
+
+#+RESULTS:
+
 ** 配列の要素に代入する
 
 - 代入もできる
@@ -2635,17 +2900,6 @@ System.out.println(3);
 
 #+RESULTS:
 : わ
-
-- 番号が長さを超えた場合
-  - *実行時例外* になる
-
-#+begin_src java :results output
-  double[] dArray = {1, 1.414, 1.732, 2, 2.236};
-  System.out.println(dArray[5]); // 実行時に例外
-  System.out.println(dArray[-1]); // 実行時に例外
-#+end_src
-
-#+RESULTS:
 
 ** 変数を用いた要素の指定
 - 番号に整数型の変数を用いることができる
