@@ -2826,7 +2826,7 @@ Javaの制御構文
 - 順次構造で文をつなげる
   - 文は必ず上から下へ、順番に次々実行される
 
-#+BEGIN_SRC plantuml :file ./image/sequence1.png
+#+BEGIN_SRC plantuml :file ./image/sequence1.png :exports results
 @startuml
 start
 :Statement 1;
@@ -2855,7 +2855,7 @@ end
 - 複合文（ブロック）
   - 文が複数個集まり、複合文という一つの文になる
 
-#+BEGIN_SRC plantuml :file ./image/sequence2.png
+#+BEGIN_SRC plantuml :file ./image/sequence2.png  :exports results
 @startuml
 start
 group Block A
@@ -2869,7 +2869,7 @@ end
 #+RESULTS:
 [[file:./image/sequence2.png]]
 
-#+BEGIN_SRC plantuml :file ./image/sequence3.png
+#+BEGIN_SRC plantuml :file ./image/sequence3.png :exports results
 @startuml
 start
 group Block B
@@ -2886,7 +2886,7 @@ end
 
 - Block AとBlock Bを順次でつなぐ
 
-#+BEGIN_SRC plantuml :file ./image/sequence4.png
+#+BEGIN_SRC plantuml :file ./image/sequence4.png :exports results
 @startuml
 start
 :**Block A**;
@@ -2932,7 +2932,7 @@ end
   - falseならば実行しない
 - 条件が成立したときに実行するブロックをthenブロックという
 
-#+BEGIN_SRC plantuml :file ./image/selection1.png
+#+BEGIN_SRC plantuml :file ./image/selection1.png :exports results
 @startuml
 start
 if (cond) then (true)
@@ -3012,7 +3012,7 @@ end
   - 二股に分岐する
 - 条件が不成立のときに実行するブロックをelseブロックと言う。
 
-#+BEGIN_SRC plantuml :file ./image/selection2.png
+#+BEGIN_SRC plantuml :file ./image/selection2.png :exports results
 @startuml
 start
 if (cond) then (true)
@@ -3051,7 +3051,7 @@ end
 - 多段階に分岐する場合
  - if文のthenブロックやelseブロックに更にif文を埋め込む
 
-#+BEGIN_SRC plantuml :file ./image/selection3.png
+#+BEGIN_SRC plantuml :file ./image/selection3.png :exports results
 @startuml
 start
 if (cond1) then (true)
@@ -3116,7 +3116,7 @@ end
   - 全体の構造がわかりにくい
   - =else if= により、これを避ける
 
-#+BEGIN_SRC plantuml :file ./image/selection4.png
+#+BEGIN_SRC plantuml :file ./image/selection4.png :exports results
 @startuml
 !pragma useVerticalIf on
 start
@@ -3227,7 +3227,7 @@ if a then b
 - 前判定の反復
   - 継続条件を反復の始まりで判定する
 
-#+BEGIN_SRC plantuml :file ./image/repetition1.png
+#+BEGIN_SRC plantuml :file ./image/repetition1.png :exports results
 @startuml
 start
 while (cond1) is (true)
@@ -3243,7 +3243,7 @@ stop
   - 継続条件を反復の終わりで判定する
   - あまり使わない
 
-#+BEGIN_SRC plantuml :file ./image/repetition2.png
+#+BEGIN_SRC plantuml :file ./image/repetition2.png :exports results
 @startuml
 start
 repeat
@@ -4051,7 +4051,7 @@ stop
 
 #+RESULTS:
 
-* 課題について
+* COMMENT 課題について
 - 来週中にGoogleクラスルームに掲示
 - 課題A
   - プログラミング言語、プログラミングに関するレポート
