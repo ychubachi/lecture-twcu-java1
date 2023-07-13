@@ -3636,7 +3636,7 @@ stop
    int sum = 0; // 合計を格納する変数
    int i = 0;
    while (i < array.length) {
-       sum = sum + array[i];
+       sum += array[i];
        i ++;
    }
   System.out.println("sum=" + sum);
@@ -3652,17 +3652,18 @@ stop
   int sum = 0; // 合計を格納する変数
   int i = 0;
   while (i < array.length) {
-      sum = sum + array[i];
+      sum += array[i];
       i ++;
   }
 
   // 平均を計算する
-  double average = sum / (array.length);
+  double average = sum / array.length;
   System.out.println("average=" + average);
 #+end_src
 
 #+RESULTS:
 : average=79.0
+
 
 *** for文
 
