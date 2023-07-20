@@ -4326,7 +4326,7 @@ stop
 
 人間が計算機を作り、計算機科学を研究して発展させてきた背景には、人が手で計算することでは到底求められない数を正確に計算させたいという要求があった。
 
-その代表的な数として円周率（π）がある。紀元前250頃、アルキメデスは幾何学的な計算により円周率は約3.14であることを求めた。時は流れ、18年初頭にマチンは100桁まで手計算で求めた。19世紀半ばシャンクスは707桁まで計算したが、死後、527桁より先の計算は間違いであることが指摘された。
+その代表的な数として円周率（π）がある。紀元前250頃、アルキメデスは幾何学的な計算により円周率は約3.14であることを求めた。時は流れ、18年初頭にマチンは100桁まで手計算で求めた。19世紀半ばシャンクスは707桁まで計算したが、死後、527桁より先の計算は間違いであることが判明した。
 
 計算機を用いて最初に円周率が求められたのは1949年のことであった。ENIACという計算機を用いて円周率を求め2037桁計算した。計算にかかった時間は70時間ほどであったという。そして、2022年6月にグーグルは円周率を100兆桁まで求めたことを発表した。このように、計算機を用いると人間が手で行うことは不可能だと考えられる計算を行うことができる。
 
@@ -4335,29 +4335,24 @@ stop
 なお、Java言語では予め、Math.PIという変数に円周率が代入されているので、これとの比較を行うことで、正しい桁数がわかる。
 
 #+begin_src java :results output
-  public class CalculatePi {
+  int terms = 100;
 
-      public static void main(String[] args) {
-          int terms = 100;
-
-          double pi = 0.0;
-          boolean positive = true;
-          for (int i = 0; i < terms; i++) {
-              int divisor = 2 * i + 1;
-              if (positive) {
-                  pi += 1.0 / divisor;
-              } else {
-                  pi -= 1.0 / divisor;
-              }
-              positive = !positive;
-          }
-          pi *= 4;
-
-          System.out.println("Leibnizの公式 による円周率の近似値: " + pi);
-          System.out.println("Math.PI       による円周率の近似値: " + Math.PI);
+  double pi = 0.0;
+  boolean positive = true;
+  for (int i = 0; i < terms; i++) {
+      int divisor = 2 * i + 1;
+      if (positive) {
+          pi += 1.0 / divisor;
+      } else {
+          pi -= 1.0 / divisor;
       }
+      positive = !positive;
   }
-#+end_src
+  pi *= 4;
+
+  System.out.println("Leibnizの公式 による円周率の近似値: " + pi);
+  System.out.println("Math.PI       による円周率の近似値: " + Math.PI);
+  #+end_src
 
 #+RESULTS:
 : Leibnizの公式 による円周率の近似値: 3.1315929035585537
