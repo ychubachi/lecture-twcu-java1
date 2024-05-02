@@ -669,7 +669,7 @@ Javaでは比較的自由に改行や空白を入れることができる。
 #+NAME: fig-program_statements1
 [[./image/program_statements.png]]
 
-** 複合文（Block statement）                                           :#03:
+** 複合文（Block statement）
 
 - いくつかの文をまとめてブロックにすることができる（複合文：Block statement）
 
@@ -839,7 +839,7 @@ block4-2
 | bit数 | 扱える情報の個数             | 正の整数とすると                | 負の整数も扱うなら                                     | 扱える情報の例             |
 |     1 | 2こ                          | 0,1                             | -1,0                                                   | 真と偽/yes no/true false   |
 |     2 | 4こ                          | 0,1,2,3                         | -2,-1,0,1                                              | 方位                       |
-|     3 | 8こ                          | 0,1,2,3,5,6,7                   | -4, -3, -2, -1, 0, 1, 2, 3                             | 月，火，水，木，金，土，日 |
+|     3 | 8こ                          | 0,1,2,3,4,5,6,7                 | -4, -3, -2, -1, 0, 1, 2, 3                             | 月，火，水，木，金，土，日 |
 |     4 | 16こ                         | 0～15                           | -8～7                                                  | 十二支                     |
 |     8 | 256こ                        | 0～255                          | -128～127                                              | A～Z、a～z、数字、記号     |
 |    16 | 65536こ                      | 0～65535                        | -32,768～32,767                                        | よく使う日本語の文字       |
@@ -889,9 +889,10 @@ block4-2
 | char（キャラクター or　チャー） |                  16 | Unicode文字 （\u0000～\uFFFF）            |
 | void（ボイド）                  |                 --- | （型が）無い ※特殊                       |
 
-#+begin_note
-Javaでは基本型の他に「参照型（ReferenceType）」がある。イメージとして、基本型を組み合わせて参照型を作る。更に、参照型は他の参照型を組み合わせることもできるので、複雑な情報を取り扱うことができる。
-#+end_note
+*** 参照型
+
+Javaでは基本型の他に「参照型（ReferenceType）」がある。イメージとして、基本型を組み合わせて参照型を作る。言わば、基本型に対する応用型である。更に、参照型は他の参照型を組み合わせることもできるので、複雑な情報を取り扱うことができる。
+
 
 ** 数値の直値
 *** 数値（Value）の書き方
@@ -916,29 +917,31 @@ Javaでは基本型の他に「参照型（ReferenceType）」がある。イメ
   - 1
   - -123
   - 3776
-- long型整数（アルファベットのLをつける）
-  - 1L
-  - 12345678901234567890123456789L
 
 #+begin_src java :results output
-  System.out.println(1);
-  System.out.println(-123);
-  System.out.println(3776);
-  System.out.println(1234567890);
+    System.out.println(1);
+    System.out.println(-123);
+    System.out.println(3776);
+    System.out.println(1234567890);
+    System.out.println(2147483647);
+    // System.out.println(2147483648);
+#+end_src
 
-  System.out.println(1L);
-  System.out.println(-8022L);
-  System.out.println(1234567890123456789L);
+- long型整数（アルファベットのLをつける）
+  - 1 *L*
+  - 12345678901234567890123456789 *L*
+
+#+begin_src java :results output
+        System.out.println(2147483648L);
+        System.out.println(1234567890123456789L);
+        System.out.println(9223372036854775807L);
+        // System.out.println(9223372036854775808L);
 #+end_src
 
 #+RESULTS:
-: 1
-: -123
-: 3776
-: 1234567890
-: 1
-: -8022
+: 2147483648
 : 1234567890123456789
+: 9223372036854775807
 
 - Lをつけないとエラー。
 
@@ -952,10 +955,6 @@ class Main {
 
 *** 実数型
 
-- float型実数（アルファベットのFをつける）
-  - -1.0F
-  - 3.14F
-  - 3.141592F
 - double型実数（デフォルト：Dをつけてもつけなくても構わない）
   - 1.0
   - -3.1415926534
@@ -963,10 +962,6 @@ class Main {
   - 6.02214076E+23 （アボガドロ定数6.02214076✕10^{23}の浮動小数点表記）
 
 #+begin_src java -n :results output
-  System.out.println(-1.0F);
-  System.out.println(3.14F);
-  System.out.println(3.141592F);
-
   System.out.println(1.0);
   System.out.println(-3.1415926534);
   System.out.println(.375);
@@ -982,22 +977,42 @@ class Main {
 : 0.375
 : 6.02214076E23
 
+- float型実数（アルファベットのFをつける）
+  - -1.0F
+  - 3.14F
+  - 3.141592F
+
+#+begin_src java -n :results output
+    System.out.println(-1.0F);
+    System.out.println(3.14F);
+    System.out.println(3.141592F);
+#+end_src
+
+  ,#+RESULTS:
+  : -1.0
+  : 3.14
+  : 3.141592
+  : 1.0
+  : -3.1415926534
+  : 0.375
+  : 6.02214076E23
+
 #+begin_note
-要するに、数字の他にピリオドがなければint、あればdoubleと扱われると覚えれば良い。
+  要するに、数字の他にピリオドがなければint、あればdoubleと扱われると覚えれば良い。
 #+end_note
 
 #+begin_src java :results output
-class Main {
-  public static void main(String[] args) {
-    System.out.println(1E+2); // 1*10^2 = 1*100 = 100
-    System.out.println(1E+1); // 1*10^1 = 1*10 = 10
-    System.out.println(1E+0); // 1*10^0 = 1*1 = 1
-    System.out.println(1E-1); // 1*10^(-1) = 1*0.1 = 0.1
-    System.out.println(1E-2); // 1*10^(-2) = 1*0.1 = 0.01
+  class Main {
+    public static void main(String[] args) {
+      System.out.println(1E+2); // 1*10^2 = 1*100 = 100
+      System.out.println(1E+1); // 1*10^1 = 1*10 = 10
+      System.out.println(1E+0); // 1*10^0 = 1*1 = 1
+      System.out.println(1E-1); // 1*10^(-1) = 1*0.1 = 0.1
+      System.out.println(1E-2); // 1*10^(-2) = 1*0.1 = 0.01
 
-    System.out.println(6.02214076E+23);
+      System.out.println(6.02214076E+23);
+    }
   }
-}
 #+end_src
 
 ** 真偽値の直値                                                        :#05:
