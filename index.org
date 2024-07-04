@@ -3527,6 +3527,7 @@ stop
 *** Javaによる表現
 - 無限反復（無限ループ）
   - 継続条件が常にtrueなので、無限にブロックを繰り返す
+  - 後で説明する break 文で抜け出すことは可能
 
 #+begin_src java :results output
   while (true) {
@@ -3672,12 +3673,12 @@ stop
   }
 
   // 平均を計算する
-  double average = sum / array.length;
+  double average = (double) sum / array.length;
   System.out.println("average=" + average);
 #+end_src
 
 #+RESULTS:
-: average=79.0
+: average=79.8
 
 
 *** for文
@@ -3715,6 +3716,12 @@ stop
 : こんにちは
 : さようなら
 : ありがとう
+
+#+begin_note
+for文はwhile文を書きやすくするための糖衣構文（Syntax sugaro）である。
+ただし、カウンタ変数の定義域はfor文のブロック内となる。
+#+end_note
+
 
 *** 後判定（repeat文）
 
@@ -3780,6 +3787,7 @@ stop
 
 - continue文
   - それ以降のブロックの実行をしない
+  - for文と組み合わせることが多い
 
 #+begin_src java :results output
   int[] array = {2, 3, -1, 5, 6};
