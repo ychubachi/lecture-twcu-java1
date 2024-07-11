@@ -1,4 +1,4 @@
-#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
+ar#+STARTUP: overview indent num align inlineimages logdone hidestars hideblocks
 #+OPTIONS: ^:{}
 #+TITLE: 情報処理技法（Javaプログラミング）I
 #+AUTHOR: 中鉢 欣秀（非常勤講師）
@@ -4342,8 +4342,6 @@ for文はwhile文を書きやすくするための糖衣構文（Syntax sugaro�
   - Googleドキュメントでレポートを作成する
   - 学籍番号、氏名を記載すること
   - 課題と問題の番号、及び解答を記載すること
-- 締め切り
-  - 8/4（金曜日）中
 
 ** 課題1
 
